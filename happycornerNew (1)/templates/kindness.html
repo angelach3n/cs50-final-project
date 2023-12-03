@@ -1,0 +1,83 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Acts of Kindness
+{% endblock %}
+
+{% block main %}
+    <div class="container mt-3 text-center">
+        <h1><b>ACTS OF KINDNESS</b></h1>
+        <p class="lead">Often, a small act can make a big difference. Please answer the three following questions for a custom random act of kindness that can make someone's day!</p>
+
+        <form action="/kindness" method="post">
+            <!-- Question 1 -->
+            <div class="card p-4 my-3" style="background-color: #FFD1DC">
+                <h5>{{ question1.text }}</h5>
+                <div class="row justify-content-center">
+                    {% for choice in question1.choices %}
+                        <div class="form-check col-md-3 mt-2">
+                            <input class="form-check-input" type="radio" name="difficulty" id="difficulty{{ loop.index }}" value="{{ choice }}">
+                            <label class="btn_white" type=button for="difficulty{{ loop.index }}" value="{{ choice }}" onclick="selectDifficulty('{{ choice }}', {{ loop.index }})">
+                                {{ choice }}
+                            </label>
+                        </div>
+                    {% endfor %}
+                </div>
+                <br>
+                <p id="selected-difficulty">Selected Difficulty:</p>
+            </div>
+
+            <!-- Question 2 -->
+            <div class="card p-4 my-3" style="background-color: #FFD1DC">
+                <h5>{{ question2.text }}</h5>
+                <div class="row justify-content-center">
+                    {% for choice in question2.choices %}
+                        <div class="form-check col-md-3 mt-2">
+                            <input class="form-check-input" type="radio" name="person" id="person{{ loop.index }}" value="{{ choice }}">
+                            <label class="btn_white" type=button for="person{{ loop.index }}" value="{{ choice }}" onclick="selectPerson('{{ choice }}', {{ loop.index }})">
+                                {{ choice }}
+                            </label>
+                        </div>
+                    {% endfor %}
+                </div>
+                <br>
+                <p id="selected-person">Selected Person:</p>
+            </div>
+
+            <!-- Question 3 -->
+            <div class="card p-4 my-3" style="background-color: #FFD1DC">
+                <h5>{{ question3.text }}</h5>
+                <div class="row justify-content-center">
+                    {% for choice in question3.choices %}
+                        <div class="form-check col-md-3 mt-2">
+                            <input class="form-check-input" type="radio" name="goal" id="goal{{ loop.index }}" value="{{ choice }}">
+                            <label class="btn_white" type=button for="goal{{ loop.index }}" value="{{ choice }}" onclick="selectGoal('{{ choice }}', {{ loop.index }})">
+                                {{ choice }}
+                            </label>
+                        </div>
+                    {% endfor %}
+                </div>
+                <br>
+                <p id="selected-goal">Selected Goal:</p>
+            </div>
+
+            <!-- Submit Button -->
+            <div class="col-md-12 mt-3">
+                <button type="submit" class="btn btn-primary">Submit</button>
+            </div>
+        </form>
+    </div>
+{% endblock %}
+
+<script>
+    function selectDifficulty(choice, choiceIndex) {
+        // Remove 'selected' class from all buttons in the same question group
+        document.querySelectorAll('.question1 .date-bubble').forEach(button => {
+            button.classList.remove('selected');
+        });
+
+        // Add 'selected' class to the clicked button
+        var clickedButton = document.querySelector('.question1 .date-bubble[data-row="' + choiceIndex + '"]');
+        clickedButton.classList.add('selected');
+    }
+</script>

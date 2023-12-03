@@ -1,0 +1,86 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    DIY Generator
+{% endblock %}
+
+{% block main %}
+<div class="container mt-3">
+    <h2>DIY Generator</h2>
+
+    <!-- Log Journal Section -->
+    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#gratitudeModal">
+        Log Journal
+    </button>
+
+    <!-- Modal for New Entry -->
+    <div class="modal fade" id="gratitudeModal" tabindex="-1" aria-labelledby="gratitudeModalLabel" aria-hidden="false">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="gratitudeModalLabel">What are you grateful for?</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <form action="/gratitude" method="post">
+                    <div class="modal-body">
+                        <textarea class="form-control" name="entry" rows="3" required></textarea>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-primary">Save Changes</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+<!-- Past Entries Section -->
+<div class='container mt-4'>
+    <h3> Past Entries </h3>
+    <div class='row'>
+        {% for entry in entries %}
+            <div class="flip-card-3D-wrapper col-md-4">
+                <div class="flip-card">
+                    <div class="flip-card-front">
+                        <div class='card-body'>
+                            <h4 class="text-center">
+                                <span class="date-bubble">{{ entry.date | truncate(13)}}</span>
+                            </h4>
+                            <p>{{ entry.text | truncate(25) }}</p>
+                            <button type="button" class="flip-card-btn-turn-to-back">See full entry</button>
+                        </div>
+                    </div>
+                    <div class="flip-card-back">
+                        <div class='card-body'>
+                            <h4 class="text-center">Full Entry</h4>
+                            <p>{{ entry.text }}</p>
+                            <button type="button" class="flip-card-btn-turn-to-front">Flip</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+</div>
+</div>
+
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+    const flipButtonsToBack = document.querySelectorAll('.flip-card-btn-turn-to-back');
+    const flipButtonsToFront = document.querySelectorAll('.flip-card-btn-turn-to-front');
+
+    flipButtonsToBack.forEach(button => {
+        button.addEventListener('click', function() {
+            this.closest('.flip-card').classList.add('do-flip');
+        });
+    });
+
+    flipButtonsToFront.forEach(button => {
+        button.addEventListener('click', function() {
+            this.closest('.flip-card').classList.remove('do-flip');
+        });
+    });
+});
+</script>
+
+{% endblock %}

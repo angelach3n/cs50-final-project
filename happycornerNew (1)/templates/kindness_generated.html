@@ -1,0 +1,23 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Acts of Kindness
+{% endblock %}
+
+{% block main %}
+    <div class="container mt-3 text-center">
+        <h1><b>TODAY'S ACT OF KINDNESS</b></h1>
+        <p class="lead">Based on your answers, this is what we have for you!</p <!-- Display Random Act of Kindness -->
+
+        <div class="card mx-auto my-4" style="width: 30rem;">
+            <div class="card-body">
+                <h5 class="card-title">{{ kindness_name }}</h5>
+                <p class="card-text">{{ kindness_desc }}</p>
+            </div>
+        </div>
+
+    <!-- Refresh Button for New Suggestion -->
+        <button class="btn btn-primary" onclick="redirectToKindnessPage();">Get Another Act</button>
+
+    </div>
+{% endblock %}

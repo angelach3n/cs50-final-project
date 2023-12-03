@@ -1,0 +1,80 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Soothing Podcast
+{% endblock %}
+
+{% block main %}
+
+<div class="container mt-3 text-center">
+
+    <h2>Soothing Podcast</h2>
+
+    <p class="lead">When you need to listen to something to clear your mind, or to help you fall asleep, simply click on a theme and a podcast episode will appear!</p>
+    <p>Refresh the page often to see the most recent episode!</p>
+    <div class="row">
+                <div class="card-body mb-3" style = "background-color: #FFD1DC">
+                    <h5 class="card-title">Pick a Theme!</h5>
+                        <div class="episodes">
+                        <button class="episode btn_white btn-primary" data-spotify-id="spotify:episode:4xFyRjXyTrykx2qdE1mweM" onclick="selectTheme('Greek Myths')">Greek Myths</button>
+                        <button class="episode btn_white btn-primary" data-spotify-id="spotify:episode:6WAhp4H6dX2EI0XlydQSQ9" onclick="selectTheme('Classics')">Classics</button>
+                        <button class="episode btn_white btn-primary" data-spotify-id="spotify:episode:351Hsrgl91eCaGEZL9h3P7" onclick="selectTheme('Romantic')">Romantic</button>
+                        <button class="episode btn_white btn-primary" data-spotify-id="spotify:episode:70nlhUokWdWsno5fFudln6" onclick="selectTheme('Fun Facts')">Fun Facts</button>
+                        <button class="episode btn_white btn-primary" data-spotify-id="spotify:episode:7Mji16qBOR180g0B131bSl" onclick="selectTheme('Egyption Myths')">Egyption Myths</button>
+                        <button class="episode btn_white btn-primary" data-spotify-id="spotify:episode:3SJa3kWFFoB01CcCfby6nV" onclick="selectTheme('Bibical')">Bibical</button>
+
+
+            <!-- Displaying the selected theme-->
+            <p id="selected-theme" class="mt-3">Selected Theme:</p>
+
+            <script>
+
+              function selectTheme(theme) {
+                  // Update the selected genre
+                  document.getElementById('selected-theme').innerText = 'Selected Theme: ' + theme;
+
+                  // Send an AJAX request to the server to handle the genre selection
+                  fetch('/select_theme', {
+                      method: 'POST',
+                      headers: {
+                          'Content-Type': 'application/json'
+                      },
+                      body: JSON.stringify({ theme: theme })
+                  })
+                  .then(response => response.json())
+                  .then(data => {
+                      // Update the selected genre on the client side
+                      document.getElementById('selected-theme').innerText = 'Selected Theme: ' + data.selected_theme;
+                  });
+              }
+            </script>
+        </div>
+    </div>
+
+    <div id="embed-iframe"></div>
+    <script src="https://open.spotify.com/embed/iframe-api/v1" async>
+    </script>
+    <script type="text/javascript">
+      window.onSpotifyIframeApiReady = (IFrameAPI) => {
+        const element = document.getElementById('embed-iframe');
+        const options = {
+          width: '100%',
+          height: '160',
+          uri: 'spotify:show:5449Y4AGBlaXm1DMOQpa37'
+        };
+        const callback = (EmbedController) => {
+          document.querySelectorAll('.episode').forEach(
+            episode => {
+              episode.addEventListener('click', () => {
+                EmbedController.loadUri(episode.dataset.spotifyId)
+              });
+            })
+        };
+        IFrameAPI.createController(element, options, callback);
+      };
+    </script>
+</div>
+
+{% endblock %}
+
+

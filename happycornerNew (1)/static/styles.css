@@ -1,0 +1,157 @@
+/* General Body Style */
+body {
+    background-color: #FFF8F0; /* Light brown background */
+    color: #333; /* Darker text */
+    font-family: 'Times New Roman', monospace;
+}
+
+/* Navbar Styles */
+nav {
+    background-color: #FFD1DC; /* Light pink */
+    border-bottom: 2px solid #FAD4D8;
+}
+nav .navbar-brand {
+    color: #8B5D5D;
+    font-weight: bold;
+}
+nav .nav-link {
+    color: #8B5D5D;
+}
+nav .nav-link:hover {
+    color: #DAB1B5;
+}
+
+/* Button Styles */
+.btn {
+    background-color: #FAD4D8;
+    color: #8B5D5D;
+    border: none;
+    padding: 8px 15px;
+    border-radius: 4px;
+    transition: background-color 0.3s;
+}
+
+.btn_white {
+    background-color: #FFFFFF;
+    color: #8B5D5D;
+    border: none;
+    padding: 8px 15px;
+    border-radius: 4px;
+    transition: background-color 0.3s;
+}
+
+.btn_white:hover {
+    background-color: #FBCBD2;
+    color: #6A4A4A;
+}
+
+/* Main Content Style */
+main {
+    padding: 20px;
+    background-color: #FFF8F0;
+}
+
+/* Footer Styles */
+footer {
+    background-color: #FFD1DC;
+    color: #8B5D5D;
+    padding: 10px 0;
+    font-size: 14px;
+}
+
+/* Additional Styling Elements */
+.card {
+    background-color: #FAF3F3;
+    border: 1px solid #FAD4D8;
+}
+
+.flip-card-3D-wrapper {
+    perspective: 1000px
+    width: 100%;
+    height: 100%;
+    max-width: 300px;
+    perspective: 900px;
+    margin: 10px auto;
+}
+
+.flip-card {
+    width: 100%; /* or any specific width you prefer */
+    height: 250px; /* already set */
+    transition: all 1s ease-in-out;
+    transform-style: preserve-3d;
+}
+
+.flip-card img {
+    display: block;
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+}
+
+.do-flip {
+    transform: rotateY(180deg);
+}
+
+.flip-card-btn-turn-to-back,
+.flip-card-btn-turn-to-front {
+    position: absolute;
+    bottom: 20px;
+    right: 20px;
+    visibility: visible;
+    border-radius: 10px;
+    background-color: #FFFFFF    ; /* White background */
+    color: #8B5D5D; /* Brown text */
+    border: none;
+}
+
+.flip-card-front, .flip-card-back {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    backface-visibility: hidden;
+    border-radius: 10px;
+    border: 1px solid #FAD4D8; /* Light pink border */
+}
+
+.flip-card-front {
+    background-color: #FFD1DC; /* Light pink background */
+    color: #8B5D5D; /* Brown text */
+    font-weight: bold; /* Make it bold */
+    padding: 5px 10px; /* Add padding to the date */
+    border-radius: 5px; /* Add rounded corners */
+    display: inline-block;
+}
+
+.flip-card-back {
+    background-color: #FFF8F0; /* Light brown background */
+    color: #333; /* Dark text */
+    transform: rotateY(180deg);
+}
+
+.flip-card-back h4 {
+    color: #8B5D5D; /* Brown color for titles */
+}
+
+.date-bubble {
+    background-color: white; /* White background */
+    color: #333; /* Text color */
+    padding: 5px 10px; /* Padding for spacing */
+    border-radius: 10px; /* Rounded corners */
+    display: inline-block; /* Display as inline-block to contain the bubble */
+    margin-bottom: 5px; /* Add some margin to separate it from the content */
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.3); /* Add a subtle shadow */
+}
+
+/* Adjustments for buttons */
+.flip-card-btn-turn-to-back:hover,
+.flip-card-btn-turn-to-front:hover {
+    background-color: #FBCBD2; /* Slightly lighter pink on hover */
+    color: #6A4A4A; /* Darker text on hover */
+}
+
+.flip-card:hover .flip-card-btn-turn-to-back,
+.flip-card:hover .flip-card-btn-turn-to-front {
+    visibility: visible;
+}
